@@ -1,5 +1,5 @@
 appId: green.creativity.wsl2cleaner
-productName: WSL2 Cleaner
+productName: Windows11-WSL2-Cleaner
 copyright: Copyright © 2026 josef@creativity.green
 directories:
   output: release
@@ -22,7 +22,7 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
-  artifactName: WSL2-Cleaner-${version}-setup.exe
+  artifactName: Windows11-WSL2-Cleaner-${version}-setup.exe
   createDesktopShortcut: true
 publish:
   provider: github

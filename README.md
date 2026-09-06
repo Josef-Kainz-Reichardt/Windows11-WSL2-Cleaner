@@ -1,4 +1,4 @@
-# WSL2 Cleaner
+# Windows11-WSL2-Cleaner
 
 > **Use at your own risk.** This tool deletes files, prunes Docker/Rancher data, runs `sudo`
 > commands inside WSL, and compacts virtual disks. Nothing here is undoable. Review what a
@@ -13,7 +13,7 @@ click each, or all at once.
 
 ## What it does
 
-WSL2 Cleaner is an Electron + React app that runs on Windows and talks to your WSL
+Windows11-WSL2-Cleaner is an Electron + React app that runs on Windows and talks to your WSL
 distros, Docker/Rancher Desktop, and Windows itself to find and remove:
 
 - **Build artifacts** — `node_modules`, `target`, `build`, and similar directories left
@@ -54,7 +54,7 @@ concurrently, and disk compaction last.
 
 ## Installation
 
-Download the latest installer (`WSL2-Cleaner-<version>-setup.exe`) from the
+Download the latest installer (`Windows11-WSL2-Cleaner-<version>-setup.exe`) from the
 [Releases](../../releases) page and run it. The app checks for and installs updates
 automatically in the background.
 
@@ -85,11 +85,12 @@ coding assistant.
 
 ## Releases & versioning
 
-Releases are automated with [semantic-release](https://semantic-release.gitbook.io/):
-every push to `main` is analyzed against
+Releases are automated with [semantic-release](https://semantic-release.gitbook.io/),
+manually triggered from the *Actions* tab (`Release` workflow → *Run workflow*). It
+analyzes commits on `main` against
 [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`,
-`BREAKING CHANGE:`, ...), which determines the next version, builds the Windows
-installer, and publishes it as a GitHub Release automatically — see
+`BREAKING CHANGE:`, ...), determines the next version, builds the Windows installer, and
+publishes it as a GitHub Release — see
 [`.github/workflows/release.yml`](./.github/workflows/release.yml).
 
 ## License

@@ -97,7 +97,7 @@ export function App(): JSX.Element {
   return (
     <div className="app">
       <header className="app__header">
-        <h1>WSL2 Cleaner</h1>
+        <h1>Windows11-WSL2-Cleaner</h1>
         <div className="app__header-actions">
           <SettingsDialog />
           <SudoPasswordDialog />
