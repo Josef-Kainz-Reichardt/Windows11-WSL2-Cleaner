@@ -67,7 +67,7 @@ pnpm build           # production build
 pnpm build:win        # production build + packaged Windows installer (.exe)
 ```
 
-Requires [pnpm](https://pnpm.io/) and Node.js 20+.
+Requires [pnpm](https://pnpm.io/) and Node.js 24 (current LTS; minimum 22.13 for pnpm 11).
 
 ## Usage
 

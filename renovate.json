@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    "schedule:weekly",
+    "npm:unpublishSafe"
+  ],
+  "timezone": "Europe/Vienna",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 4am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Auto-merge non-major devDependency bumps for pure build/test tooling once CI passes",
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": ["typescript", "vite", "vitest", "@vitejs/plugin-react", "@types/*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Electron ecosystem: group together, never auto-merge (native ABI / packaging risk)",
+      "groupName": "electron",
+      "matchPackageNames": [
+        "electron",
+        "electron-builder",
+        "electron-vite",
+        "electron-updater",
+        "electron-log",
+        "electron-store"
+      ],
+      "automerge": false
+    },
+    {
+      "description": "semantic-release plugins: group together, never auto-merge (release pipeline risk)",
+      "groupName": "semantic-release",
+      "matchPackageNames": ["semantic-release", "@semantic-release/*"],
+      "automerge": false
+    },
+    {
+      "description": "Never auto-merge major version bumps",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["major-update"]
+    }
+  ]
+}
