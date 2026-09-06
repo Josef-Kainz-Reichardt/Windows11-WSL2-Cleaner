@@ -1,0 +1,30 @@
+appId: green.creativity.wsl2cleaner
+productName: WSL2 Cleaner
+copyright: Copyright © 2026 josef@creativity.green
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+extraResources:
+  - from: resources/wsl-scripts
+    to: wsl-scripts
+  - from: resources/ps
+    to: ps
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  requestedExecutionLevel: requireAdministrator
+nsis:
+  oneClick: false
+  perMachine: true
+  allowToChangeInstallationDirectory: true
+  artifactName: WSL2-Cleaner-${version}-setup.exe
+  createDesktopShortcut: true
+publish:
+  provider: github
+  owner: Josef-Kainz-Reichardt
+  repo: Windows11-WSL2-Cleaner
