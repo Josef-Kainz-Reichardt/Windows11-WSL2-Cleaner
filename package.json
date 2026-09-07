@@ -5,7 +5,7 @@
   "author": "josef@creativity.green",
   "private": true,
   "main": "./out/main/index.js",
-  "packageManager": "pnpm@11.13.0",
+  "packageManager": "pnpm@12.3.3",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
