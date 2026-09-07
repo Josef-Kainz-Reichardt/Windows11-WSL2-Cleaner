@@ -21,6 +21,7 @@ export function App(): JSX.Element {
   const statuses = useChecksStore((s) => s.statuses)
   const scanResults = useChecksStore((s) => s.scanResults)
   const cleanResults = useChecksStore((s) => s.cleanResults)
+  const logs = useChecksStore((s) => s.logs)
   const disabledCheckIds = useChecksStore((s) => s.settings.disabledCheckIds)
   const running = useChecksStore((s) => s.running)
   const scanAll = useChecksStore((s) => s.scanAll)
@@ -126,6 +127,7 @@ export function App(): JSX.Element {
           scanResults={scanResults}
           disabledCheckIds={disabledCheckIds}
           cleanResults={cleanResults}
+          logs={logs}
         />
         <span className="toolbar__total">
           insgesamt bereinigbar: <strong>{formatBytes(totalReclaimableBytes)}</strong>

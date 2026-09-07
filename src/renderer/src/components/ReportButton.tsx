@@ -9,9 +9,10 @@ interface Props {
   scanResults: Record<string, ScanResult>
   disabledCheckIds: string[]
   cleanResults: Record<string, CleanResult>
+  logs: Record<string, string[]>
 }
 
-export function ReportButton({ overview, definitions, scanResults, disabledCheckIds, cleanResults }: Props): JSX.Element | null {
+export function ReportButton({ overview, definitions, scanResults, disabledCheckIds, cleanResults, logs }: Props): JSX.Element | null {
   const [feedback, setFeedback] = useState<string | null>(null)
 
   if (!overview) return null
@@ -22,13 +23,13 @@ export function ReportButton({ overview, definitions, scanResults, disabledCheck
   }
 
   async function handleCopy(): Promise<void> {
-    const report = buildReport(overview!, definitions, scanResults, disabledCheckIds, cleanResults)
+    const report = buildReport(overview!, definitions, scanResults, disabledCheckIds, cleanResults, logs)
     await navigator.clipboard.writeText(report)
     showFeedback('In Zwischenablage kopiert')
   }
 
   async function handleSave(): Promise<void> {
-    const report = buildReport(overview!, definitions, scanResults, disabledCheckIds, cleanResults)
+    const report = buildReport(overview!, definitions, scanResults, disabledCheckIds, cleanResults, logs)
     const suggestedName = `storage-report-${new Date().toISOString().slice(0, 10)}.md`
     const result = await api.report.saveToFile(report, suggestedName)
     if (result.ok) showFeedback(`Gespeichert: ${result.path}`)

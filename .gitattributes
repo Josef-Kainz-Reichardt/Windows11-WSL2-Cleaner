@@ -1,0 +1,5 @@
+# Force LF everywhere, regardless of each contributor's/runner's core.autocrlf.
+# Critical for resources/wsl-scripts/*.sh: CRLF line endings break bash inside
+# WSL ("$'\r': command not found") — this bit us on the Windows GitHub Actions
+# runner, which defaults to core.autocrlf=true on checkout.
+* text=auto eol=lf

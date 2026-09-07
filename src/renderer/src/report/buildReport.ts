@@ -22,7 +22,8 @@ export function buildReport(
   definitions: CheckDefinition[],
   scanResults: Record<string, ScanResult>,
   disabledCheckIds: string[],
-  cleanResults: Record<string, CleanResult> = {}
+  cleanResults: Record<string, CleanResult> = {},
+  logs: Record<string, string[]> = {}
 ): string {
   const lines: string[] = []
   const now = new Date()
@@ -106,6 +107,14 @@ export function buildReport(
     )
     for (const d of scanErrors) {
       lines.push(`- ${translateCheckName(d)}: ${scanResults[d.id]?.error}`)
+      const logLines = (logs[d.id] ?? []).filter((l) => l.trim().length > 0)
+      if (logLines.length > 0) {
+        const shown = logLines.slice(-15)
+        const omitted = logLines.length - shown.length
+        lines.push(
+          `  log${omitted > 0 ? ` (last ${shown.length} of ${logLines.length})` : ''}: ${shown.join(' | ').replace(/\n/g, ' ')}`
+        )
+      }
     }
     lines.push('')
   }

@@ -11,6 +11,12 @@ function hashContent(buf: Buffer): string {
   return crypto.createHash('sha256').update(buf).digest('hex')
 }
 
+/** CRLF line endings break bash inside WSL ("$'\r': command not found") — normalize
+ * regardless of how the local file ended up with them (editor, git config, packaging). */
+function readNormalized(abs: string): Buffer {
+  return Buffer.from(fs.readFileSync(abs, 'utf8').replace(/\r\n/g, '\n'), 'utf8')
+}
+
 interface LocalFile {
   rel: string
   abs: string
@@ -48,7 +54,7 @@ async function deployViaUnc(distro: string, user: string): Promise<boolean> {
     const localRoot = getWslScriptsDir()
     const files = collectLocalFiles(localRoot)
     for (const f of files) {
-      const content = fs.readFileSync(f.abs)
+      const content = readNormalized(f.abs)
       const destPath = path.join(uncDir, f.rel.split('/').join(path.sep))
       fs.mkdirSync(path.dirname(destPath), { recursive: true })
       let needsWrite = true
@@ -76,7 +82,7 @@ async function deployViaBase64(distro: string, user: string): Promise<boolean> {
   if (mkdirRes.code !== 0) return false
 
   for (const f of files) {
-    const content = fs.readFileSync(f.abs)
+    const content = readNormalized(f.abs)
     const b64 = content.toString('base64')
     const destPath = `${remoteDir}/${f.rel}`
     const parentMkdir = `mkdir -p "$(dirname "${destPath}")"`
