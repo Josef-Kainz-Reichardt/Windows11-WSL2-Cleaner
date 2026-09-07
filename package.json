@@ -1,6 +1,6 @@
 {
   "name": "windows11-wsl2-cleaner",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Windows 11 + WSL2 dev environment cleanup tool",
   "author": "josef@creativity.green",
   "private": true,

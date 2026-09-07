@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.0.2...v1.1.0) (2026-09-07)
+
+
+### Features
+
+* surface scan errors in the storage report ([f040796](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/f0407960e0ad4bad507fbe6bd418b66e71f7387d))
+
 ## [1.0.2](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.0.1...v1.0.2) (2026-09-07)
 
 
