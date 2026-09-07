@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.1.0...v1.1.1) (2026-09-07)
+
+
+### Bug Fixes
+
+* CRLF line endings breaking every WSL check, add error log to report ([e43b306](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/e43b30677bfd98e25fd4c45030b7a93a944d56fd))
+
 # [1.1.0](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.0.2...v1.1.0) (2026-09-07)
 
 
