@@ -93,7 +93,22 @@ export function buildReport(
   }
 
   const neverScanned = definitions.filter((d) => scanResults[d.id] === undefined)
-  const notEstimable = definitions.filter((d) => scanResults[d.id]?.bytesReclaimable === null)
+  const scanErrors = definitions.filter((d) => scanResults[d.id]?.error !== undefined)
+  const notEstimable = definitions.filter(
+    (d) => scanResults[d.id]?.bytesReclaimable === null && scanResults[d.id]?.error === undefined
+  )
+
+  if (scanErrors.length > 0) {
+    lines.push('## Checks with scan errors')
+    lines.push(
+      'These checks failed while scanning (not just "no size estimate available") — the underlying operation itself ' +
+        'errored out, so nothing was measured. Worth investigating before relying on "Alles bereinigen" for them:'
+    )
+    for (const d of scanErrors) {
+      lines.push(`- ${translateCheckName(d)}: ${scanResults[d.id]?.error}`)
+    }
+    lines.push('')
+  }
 
   if (notEstimable.length > 0) {
     lines.push('## Checks without a size estimate ahead of time')
@@ -126,7 +141,9 @@ export function buildReport(
       'top 10). Please analyze this breakdown for where the most space can be freed with the least risk, and propose ' +
       'concrete, prioritized next steps — split into "automated via Windows11-WSL2-Cleaner" (see the Cleanable Checks table) and ' +
       '"manual, based on the drilldown data" (e.g. specific large subfolders under Programs/Rest of user ' +
-      'profile/Other user accounts). If a "Recent Clean Run Results" section is present, also flag any errors or ' +
+      'profile/Other user accounts). If a "Checks with scan errors" section is present, treat it as a distinct, ' +
+      'higher-priority follow-up item — it means the check itself failed (e.g. a WSL/exit-code error), not just that ' +
+      'no size estimate was available. If a "Recent Clean Run Results" section is present, also flag any errors or ' +
       'suspicious log entries there (e.g. files that could not be deleted) as their own follow-up item.'
   )
 
