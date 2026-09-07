@@ -1,5 +1,13 @@
 import { create } from 'zustand'
-import type { AppSettings, CheckCategory, CheckDefinition, CheckStatus, ScanResult, CleanResult } from '@shared/types'
+import type {
+  AppSettings,
+  CheckCategory,
+  CheckDefinition,
+  CheckStatus,
+  ScanResult,
+  CleanResult,
+  UpdateCheckResult
+} from '@shared/types'
 import { api } from '../api/rendererApi'
 
 interface ChecksState {
@@ -11,8 +19,12 @@ interface ChecksState {
   running: boolean
   hasSudoPassword: boolean
   settings: AppSettings
+  appVersion: string
+  updateChecking: boolean
+  updateCheckResult: UpdateCheckResult | null
 
   load(): Promise<void>
+  checkForUpdates(): Promise<void>
   scanOne(checkId: string): Promise<void>
   cleanOne(checkId: string): Promise<void>
   scanAll(): Promise<void>
@@ -47,10 +59,17 @@ export const useChecksStore = create<ChecksState>((set, get) => ({
     installerQuarantineRetentionDays: 30,
     installerQuarantineAutoDelete: false
   },
+  appVersion: '',
+  updateChecking: false,
+  updateCheckResult: null,
 
   async load() {
-    const [definitions, settings] = await Promise.all([api.checks.list(), api.settings.get()])
-    set({ definitions, settings })
+    const [definitions, settings, appVersion] = await Promise.all([
+      api.checks.list(),
+      api.settings.get(),
+      api.app.getVersion()
+    ])
+    set({ definitions, settings, appVersion })
     await get().refreshHasSudoPassword()
 
     api.events.onCheckStatus(({ checkId, status }) => {
@@ -124,6 +143,16 @@ export const useChecksStore = create<ChecksState>((set, get) => ({
   async refreshHasSudoPassword() {
     const has = await api.secrets.hasSudoPassword()
     set({ hasSudoPassword: has })
+  },
+
+  async checkForUpdates() {
+    set({ updateChecking: true, updateCheckResult: null })
+    try {
+      const result = await api.updates.check()
+      set({ updateCheckResult: result })
+    } finally {
+      set({ updateChecking: false })
+    }
   },
 
   async setCheckDisabled(checkId, disabled) {

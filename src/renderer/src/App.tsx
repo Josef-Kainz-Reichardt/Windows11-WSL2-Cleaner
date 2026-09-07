@@ -6,7 +6,6 @@ import { CheckList } from './components/CheckList'
 import { CleanAllButton } from './components/CleanAllButton'
 import { RefreshButton } from './components/RefreshButton'
 import { ReportButton } from './components/ReportButton'
-import { SudoPasswordDialog } from './components/SudoPasswordDialog'
 import { SettingsDialog } from './components/SettingsDialog'
 import { RancherConfirmDialog } from './components/RancherConfirmDialog'
 import { InstallerCleanupConfirmDialog } from './components/InstallerCleanupConfirmDialog'
@@ -101,7 +100,6 @@ export function App(): JSX.Element {
         <h1>Windows11-WSL2-Cleaner</h1>
         <div className="app__header-actions">
           <SettingsDialog />
-          <SudoPasswordDialog />
         </div>
       </header>
 

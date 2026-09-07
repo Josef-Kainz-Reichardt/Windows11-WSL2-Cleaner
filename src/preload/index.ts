@@ -19,6 +19,7 @@ import type {
   DismProgressEvent,
   DiskOverviewCategory,
   DiskOverviewProgressEvent,
+  UpdateCheckResult,
   ApiBridge
 } from '@shared/types'
 
@@ -29,6 +30,12 @@ function on<T>(channel: string, callback: (payload: T) => void): () => void {
 }
 
 const api: ApiBridge = {
+  app: {
+    getVersion: (): Promise<string> => ipcRenderer.invoke(IPC.appGetVersion)
+  },
+  updates: {
+    check: (): Promise<UpdateCheckResult> => ipcRenderer.invoke(IPC.updatesCheckForUpdates)
+  },
   checks: {
     list: (): Promise<CheckDefinition[]> => ipcRenderer.invoke(IPC.checksList),
     scan: (checkId: string): Promise<ScanResult> => ipcRenderer.invoke(IPC.checksScan, checkId),

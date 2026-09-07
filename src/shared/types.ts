@@ -199,8 +199,20 @@ export interface SudoPasswordResult {
   error?: string
 }
 
+export interface UpdateCheckResult {
+  status: 'update-available' | 'up-to-date' | 'error'
+  version?: string
+  error?: string
+}
+
 /** Shape of the `window.api` bridge exposed by preload/index.ts via contextBridge. */
 export interface ApiBridge {
+  app: {
+    getVersion(): Promise<string>
+  }
+  updates: {
+    check(): Promise<UpdateCheckResult>
+  }
   checks: {
     list(): Promise<CheckDefinition[]>
     scan(checkId: string): Promise<ScanResult>
@@ -258,6 +270,8 @@ export interface ApiBridge {
 
 /** IPC channel name constants shared by main (handlers) and preload (bridge). */
 export const IPC = {
+  appGetVersion: 'app:getVersion',
+  updatesCheckForUpdates: 'updates:checkForUpdates',
   checksList: 'checks:list',
   checksScan: 'checks:scan',
   checksClean: 'checks:clean',

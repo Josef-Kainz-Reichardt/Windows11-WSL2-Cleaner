@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow, dialog } from 'electron'
+import { ipcMain, BrowserWindow, dialog, app } from 'electron'
 import fs from 'node:fs'
 import { IPC } from '@shared/types'
 import type { RunOptions, DismProgressEvent, RancherStatusEvent, LogEvent, ProgressEvent, CheckCategory } from '@shared/types'
@@ -28,6 +28,7 @@ import { setSudoPassword, hasSudoPassword, clearSudoPassword } from '@main/secre
 import { runCleanAll } from '@main/orchestrator/cleanAll'
 import { startRancherDesktop } from '@main/rancherDesktop/rdctl'
 import { appEvents, EVENTS, emitCheckLog, emitCheckStatus } from '@main/events/bus'
+import { checkForUpdatesManually } from '@main/updater/checkForUpdates'
 
 function broadcast(channel: string, payload: unknown): void {
   for (const win of BrowserWindow.getAllWindows()) {
@@ -180,4 +181,7 @@ export function registerIpcHandlers(): void {
     clearSudoPassword()
     return { ok: true }
   })
+
+  ipcMain.handle(IPC.appGetVersion, () => app.getVersion())
+  ipcMain.handle(IPC.updatesCheckForUpdates, () => checkForUpdatesManually())
 }
