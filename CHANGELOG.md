@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.0.1...v1.0.2) (2026-09-07)
+
+
+### Bug Fixes
+
+* use pnpm-workspace.yaml nodeLinker instead of .npmrc ([5be9499](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/5be9499b8ba9196840e1178f1e0fb794223438c9))
+
 ## [1.0.1](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.0.0...v1.0.1) (2026-09-06)
 
 
