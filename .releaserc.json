@@ -28,6 +28,12 @@
           {
             "path": "release/Windows11-WSL2-Cleaner-*-setup.exe",
             "label": "Windows11-WSL2-Cleaner Setup (Windows x64)"
+          },
+          {
+            "path": "release/Windows11-WSL2-Cleaner-*-setup.exe.blockmap"
+          },
+          {
+            "path": "release/latest.yml"
           }
         ]
       }
