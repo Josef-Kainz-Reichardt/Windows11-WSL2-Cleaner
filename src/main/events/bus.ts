@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events'
-import type { DismProgressEvent, RancherStatusEvent, LogEvent, ProgressEvent } from '@shared/types'
+import type { DismProgressEvent, RancherStatusEvent, LogEvent, ProgressEvent, UpdateDownloadedEvent } from '@shared/types'
 
 /** Process-wide event bus. IPC registration subscribes to these and forwards to the renderer. */
 class AppEventBus extends EventEmitter {}
@@ -9,7 +9,8 @@ export const EVENTS = {
   dismProgress: 'dism:progress',
   rancherStatus: 'rancher:statusChanged',
   checkLog: 'checks:log',
-  checkStatus: 'checks:statusChanged'
+  checkStatus: 'checks:statusChanged',
+  updateDownloaded: 'updates:downloaded'
 } as const
 
 export function emitDismProgress(payload: DismProgressEvent): void {
@@ -26,4 +27,8 @@ export function emitCheckLog(payload: LogEvent): void {
 
 export function emitCheckStatus(payload: ProgressEvent): void {
   appEvents.emit(EVENTS.checkStatus, payload)
+}
+
+export function emitUpdateDownloaded(payload: UpdateDownloadedEvent): void {
+  appEvents.emit(EVENTS.updateDownloaded, payload)
 }

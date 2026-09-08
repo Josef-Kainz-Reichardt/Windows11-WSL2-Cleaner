@@ -205,6 +205,10 @@ export interface UpdateCheckResult {
   error?: string
 }
 
+export interface UpdateDownloadedEvent {
+  version: string
+}
+
 /** Shape of the `window.api` bridge exposed by preload/index.ts via contextBridge. */
 export interface ApiBridge {
   app: {
@@ -212,6 +216,8 @@ export interface ApiBridge {
   }
   updates: {
     check(): Promise<UpdateCheckResult>
+    /** Quits and installs an already-downloaded update (see events.onUpdateDownloaded). */
+    install(): Promise<void>
   }
   checks: {
     list(): Promise<CheckDefinition[]>
@@ -265,6 +271,7 @@ export interface ApiBridge {
     onInstallerConfirmRequest(cb: (e: InstallerConfirmRequest) => void): () => void
     onDismProgress(cb: (e: DismProgressEvent) => void): () => void
     onDiskOverviewProgress(cb: (e: DiskOverviewProgressEvent) => void): () => void
+    onUpdateDownloaded(cb: (e: UpdateDownloadedEvent) => void): () => void
   }
 }
 
@@ -272,6 +279,7 @@ export interface ApiBridge {
 export const IPC = {
   appGetVersion: 'app:getVersion',
   updatesCheckForUpdates: 'updates:checkForUpdates',
+  updatesInstall: 'updates:install',
   checksList: 'checks:list',
   checksScan: 'checks:scan',
   checksClean: 'checks:clean',
@@ -303,5 +311,6 @@ export const IPC = {
   eventRancherConfirmRequest: 'rancher:confirmRequest',
   eventInstallerConfirmRequest: 'installerCleanup:confirmRequest',
   eventDismProgress: 'dism:progress',
-  eventDiskOverviewProgress: 'disk:overviewProgress'
+  eventDiskOverviewProgress: 'disk:overviewProgress',
+  eventUpdateDownloaded: 'updates:downloaded'
 } as const

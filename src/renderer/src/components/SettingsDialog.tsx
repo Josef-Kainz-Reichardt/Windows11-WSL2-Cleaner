@@ -15,7 +15,9 @@ export function SettingsDialog(): JSX.Element {
   const appVersion = useChecksStore((s) => s.appVersion)
   const updateChecking = useChecksStore((s) => s.updateChecking)
   const updateCheckResult = useChecksStore((s) => s.updateCheckResult)
+  const updateReadyVersion = useChecksStore((s) => s.updateReadyVersion)
   const checkForUpdates = useChecksStore((s) => s.checkForUpdates)
+  const installUpdate = useChecksStore((s) => s.installUpdate)
   const hasSudoPassword = useChecksStore((s) => s.hasSudoPassword)
   const refreshHasSudoPassword = useChecksStore((s) => s.refreshHasSudoPassword)
   const [open, setOpen] = useState(false)
@@ -101,16 +103,29 @@ export function SettingsDialog(): JSX.Element {
               <h4>Version</h4>
               <p>Windows11-WSL2-Cleaner {appVersion || '…'}</p>
               <div className="settings-dialog__actions">
-                <button className="btn btn--ghost" onClick={checkForUpdates} disabled={updateChecking}>
-                  {updateChecking ? 'Suche…' : 'Nach Updates suchen'}
-                </button>
-                {updateCheckResult && (
-                  <span className="settings-dialog__saved">
-                    {updateCheckResult.status === 'update-available' &&
-                      `Update verfügbar: ${updateCheckResult.version}`}
-                    {updateCheckResult.status === 'up-to-date' && 'Aktuelle Version ist installiert'}
-                    {updateCheckResult.status === 'error' && `Fehler: ${updateCheckResult.error}`}
-                  </span>
+                {updateReadyVersion ? (
+                  <>
+                    <button className="btn btn--primary" onClick={installUpdate}>
+                      Jetzt installieren und neu starten
+                    </button>
+                    <span className="settings-dialog__saved">
+                      Update {updateReadyVersion} heruntergeladen
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <button className="btn btn--ghost" onClick={checkForUpdates} disabled={updateChecking}>
+                      {updateChecking ? 'Suche…' : 'Nach Updates suchen'}
+                    </button>
+                    {updateCheckResult && (
+                      <span className="settings-dialog__saved">
+                        {updateCheckResult.status === 'update-available' &&
+                          `Update ${updateCheckResult.version} wird im Hintergrund heruntergeladen…`}
+                        {updateCheckResult.status === 'up-to-date' && 'Aktuelle Version ist installiert'}
+                        {updateCheckResult.status === 'error' && `Fehler: ${updateCheckResult.error}`}
+                      </span>
+                    )}
+                  </>
                 )}
               </div>
 

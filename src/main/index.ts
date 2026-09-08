@@ -6,6 +6,7 @@ import { initAppState } from '@main/state/appState'
 import { registerIpcHandlers } from '@main/ipc/registerIpcHandlers'
 import { registerRancherConfirmHandler } from '@main/rancherDesktop/confirm'
 import { registerInstallerConfirmHandler } from '@main/checks/windows/installerCleanup/confirm'
+import { emitUpdateDownloaded } from '@main/events/bus'
 
 log.initialize()
 log.errorHandler.startCatching()
@@ -67,6 +68,10 @@ app.whenReady().then(async () => {
 
   if (app.isPackaged) {
     autoUpdater.logger = log
+    // Fires whether the download was kicked off by this silent startup check
+    // or by the manual "Nach Updates suchen" button — same autoUpdater
+    // instance, autoDownload defaults to true either way.
+    autoUpdater.on('update-downloaded', (info) => emitUpdateDownloaded({ version: info.version }))
     autoUpdater.checkForUpdatesAndNotify().catch((err) => log.error('autoUpdater failed', err))
   }
 

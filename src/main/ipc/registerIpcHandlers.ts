@@ -1,7 +1,16 @@
 import { ipcMain, BrowserWindow, dialog, app } from 'electron'
 import fs from 'node:fs'
+import { autoUpdater } from 'electron-updater'
 import { IPC } from '@shared/types'
-import type { RunOptions, DismProgressEvent, RancherStatusEvent, LogEvent, ProgressEvent, CheckCategory } from '@shared/types'
+import type {
+  RunOptions,
+  DismProgressEvent,
+  RancherStatusEvent,
+  LogEvent,
+  ProgressEvent,
+  CheckCategory,
+  UpdateDownloadedEvent
+} from '@shared/types'
 import type { CheckContext, LogSink } from '@main/checks/types'
 import { safeScan, safeClean } from '@main/checks/safeRun'
 import {
@@ -51,6 +60,7 @@ export function registerIpcHandlers(): void {
   appEvents.on(EVENTS.rancherStatus, (p: RancherStatusEvent) => broadcast(IPC.eventRancherStatusChanged, p))
   appEvents.on(EVENTS.checkLog, (p: LogEvent) => broadcast(IPC.eventChecksLog, p))
   appEvents.on(EVENTS.checkStatus, (p: ProgressEvent) => broadcast(IPC.eventChecksStatusChanged, p))
+  appEvents.on(EVENTS.updateDownloaded, (p: UpdateDownloadedEvent) => broadcast(IPC.eventUpdateDownloaded, p))
 
   ipcMain.handle(IPC.checksList, () => getChecks().map((c) => c.definition))
 
@@ -184,4 +194,7 @@ export function registerIpcHandlers(): void {
 
   ipcMain.handle(IPC.appGetVersion, () => app.getVersion())
   ipcMain.handle(IPC.updatesCheckForUpdates, () => checkForUpdatesManually())
+  ipcMain.handle(IPC.updatesInstall, () => {
+    autoUpdater.quitAndInstall()
+  })
 }

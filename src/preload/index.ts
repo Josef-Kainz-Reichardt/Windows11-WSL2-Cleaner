@@ -20,6 +20,7 @@ import type {
   DiskOverviewCategory,
   DiskOverviewProgressEvent,
   UpdateCheckResult,
+  UpdateDownloadedEvent,
   ApiBridge
 } from '@shared/types'
 
@@ -34,7 +35,8 @@ const api: ApiBridge = {
     getVersion: (): Promise<string> => ipcRenderer.invoke(IPC.appGetVersion)
   },
   updates: {
-    check: (): Promise<UpdateCheckResult> => ipcRenderer.invoke(IPC.updatesCheckForUpdates)
+    check: (): Promise<UpdateCheckResult> => ipcRenderer.invoke(IPC.updatesCheckForUpdates),
+    install: (): Promise<void> => ipcRenderer.invoke(IPC.updatesInstall)
   },
   checks: {
     list: (): Promise<CheckDefinition[]> => ipcRenderer.invoke(IPC.checksList),
@@ -96,7 +98,8 @@ const api: ApiBridge = {
       on(IPC.eventInstallerConfirmRequest, cb),
     onDismProgress: (cb: (e: DismProgressEvent) => void): (() => void) => on(IPC.eventDismProgress, cb),
     onDiskOverviewProgress: (cb: (e: DiskOverviewProgressEvent) => void): (() => void) =>
-      on(IPC.eventDiskOverviewProgress, cb)
+      on(IPC.eventDiskOverviewProgress, cb),
+    onUpdateDownloaded: (cb: (e: UpdateDownloadedEvent) => void): (() => void) => on(IPC.eventUpdateDownloaded, cb)
   }
 }
 

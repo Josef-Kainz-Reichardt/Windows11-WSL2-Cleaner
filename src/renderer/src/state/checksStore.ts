@@ -22,9 +22,12 @@ interface ChecksState {
   appVersion: string
   updateChecking: boolean
   updateCheckResult: UpdateCheckResult | null
+  /** Version of an update that finished downloading and is ready to install, if any. */
+  updateReadyVersion: string | null
 
   load(): Promise<void>
   checkForUpdates(): Promise<void>
+  installUpdate(): Promise<void>
   scanOne(checkId: string): Promise<void>
   cleanOne(checkId: string): Promise<void>
   scanAll(): Promise<void>
@@ -62,6 +65,7 @@ export const useChecksStore = create<ChecksState>((set, get) => ({
   appVersion: '',
   updateChecking: false,
   updateCheckResult: null,
+  updateReadyVersion: null,
 
   async load() {
     const [definitions, settings, appVersion] = await Promise.all([
@@ -77,6 +81,9 @@ export const useChecksStore = create<ChecksState>((set, get) => ({
     })
     api.events.onCheckLog(({ checkId, level, message }) => {
       set((s) => ({ logs: appendLog(s, checkId, `[${level}] ${message}`) }))
+    })
+    api.events.onUpdateDownloaded(({ version }) => {
+      set({ updateReadyVersion: version })
     })
   },
 
@@ -153,6 +160,10 @@ export const useChecksStore = create<ChecksState>((set, get) => ({
     } finally {
       set({ updateChecking: false })
     }
+  },
+
+  async installUpdate() {
+    await api.updates.install()
   },
 
   async setCheckDisabled(checkId, disabled) {
