@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.1.1...v1.2.0) (2026-09-08)
+
+
+### Features
+
+* manual update check + version in settings, move sudo password there ([2f6c6b2](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/2f6c6b2503fc4cbe3c679b1786e2881058fee0ea))
+
 ## [1.1.1](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.1.0...v1.1.1) (2026-09-07)
 
 
