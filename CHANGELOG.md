@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.2.2...v1.3.0) (2026-09-08)
+
+
+### Features
+
+* add explicit "Jetzt installieren" button for downloaded updates ([9aab43d](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/9aab43db4bad5d33ce0faf4c7babc14adad119b7))
+
 ## [1.2.2](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.2.1...v1.2.2) (2026-09-08)
 
 
