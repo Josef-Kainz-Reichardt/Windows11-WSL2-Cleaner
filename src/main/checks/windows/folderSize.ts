@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
-const DUMMY_DEST = path.join(os.tmpdir(), 'wsl2cleaner-robocopy-dummy')
+const DUMMY_DEST = path.join(os.tmpdir(), 'windows11wsl2cleaner-robocopy-dummy')
 const FOLDER_SIZE_TIMEOUT_MS = 5 * 60 * 1000
 
 /**

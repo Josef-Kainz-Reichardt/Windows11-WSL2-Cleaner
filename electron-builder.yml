@@ -1,4 +1,4 @@
-appId: green.creativity.wsl2cleaner
+appId: green.creativity.windows11wsl2cleaner
 productName: Windows11-WSL2-Cleaner
 copyright: Copyright © 2026 josef@creativity.green
 directories:
@@ -19,11 +19,16 @@ win:
         - x64
   requestedExecutionLevel: requireAdministrator
 nsis:
+  # Pinned once so future appId/productName renames never again orphan the
+  # registry uninstall key (that's exactly what happened across the
+  # WSL2 Cleaner -> Windows11-WSL2-Cleaner / wsl2cleaner -> windows11wsl2cleaner renames).
+  guid: ced97d98-2047-4b5a-96cb-7f9ebee2093b
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
   artifactName: Windows11-WSL2-Cleaner-${version}-setup.exe
   createDesktopShortcut: true
+  include: build/installer.nsh
 publish:
   provider: github
   owner: Josef-Kainz-Reichardt

@@ -10,7 +10,7 @@ function diskpartCompact(vhdxPath: string): Promise<{ code: number; output: stri
     const script = [`select vdisk file="${vhdxPath}"`, 'attach vdisk readonly', 'compact vdisk', 'detach vdisk', 'exit'].join(
       '\r\n'
     )
-    const tmpFile = path.join(os.tmpdir(), `wsl2cleaner-diskpart-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`)
+    const tmpFile = path.join(os.tmpdir(), `windows11wsl2cleaner-diskpart-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`)
     fs.writeFileSync(tmpFile, script, 'ascii')
     // diskpart writes its console output in the OEM codepage (e.g. cp850 on a
     // German Windows), which mangles umlauts when decoded as UTF-8 ("f�r",

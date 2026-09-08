@@ -1,5 +1,5 @@
 #!/bin/bash
-# common.sh — shared helpers for all wsl2cleaner check scripts.
+# common.sh — shared helpers for all windows11wsl2cleaner check scripts.
 # Sourced by cleaner.sh; never executed directly.
 
 # --- Toolchain PATH bootstrap -------------------------------------------------

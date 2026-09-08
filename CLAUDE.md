@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Electron + React desktop app ("wsl2cleaner") that scans and cleans disk-space-hogging junk on a Windows 11 + WSL2 dev machine: build artifacts (`node_modules`, `target`, `build`, ...), package-manager caches, Docker/Rancher Desktop data, Windows temp/system caches, and VHDX compaction for WSL virtual disks. Runs on Windows only (shells out to `wsl.exe`, `diskpart.exe`, PowerShell).
+Electron + React desktop app ("windows11wsl2cleaner") that scans and cleans disk-space-hogging junk on a Windows 11 + WSL2 dev machine: build artifacts (`node_modules`, `target`, `build`, ...), package-manager caches, Docker/Rancher Desktop data, Windows temp/system caches, and VHDX compaction for WSL virtual disks. Runs on Windows only (shells out to `wsl.exe`, `diskpart.exe`, PowerShell).
 
 ## Commands
 

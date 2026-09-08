@@ -4,7 +4,7 @@ import crypto from 'node:crypto'
 import { getWslScriptsDir } from '@main/util/resourcePaths'
 import { execWslDistro } from '@main/util/wslExec'
 
-const REMOTE_DIR = '.cache/wsl2cleaner/scripts'
+const REMOTE_DIR = '.cache/windows11wsl2cleaner/scripts'
 const BASE64_CHUNK_SIZE = 8000
 
 function hashContent(buf: Buffer): string {

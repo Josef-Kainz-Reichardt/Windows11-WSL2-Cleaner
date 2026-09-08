@@ -1,5 +1,5 @@
 #!/bin/bash
-# cleaner.sh — single entry point for all WSL-side checks of wsl2cleaner.
+# cleaner.sh — single entry point for all WSL-side checks of windows11wsl2cleaner.
 #
 # Usage: cleaner.sh <check-id> <scan|clean> [--dry-run]
 #
