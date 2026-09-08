@@ -6,7 +6,7 @@
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
     "schedule:weekly",
-    "npm:unpublishSafe"
+    "security:minimumReleaseAgeNpm"
   ],
   "timezone": "Europe/Vienna",
   "lockFileMaintenance": {
