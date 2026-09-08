@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.2.1...v1.2.2) (2026-09-08)
+
+
+### Bug Fixes
+
+* attach latest.yml and blockmap to GitHub releases ([f787aba](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/f787abaa3bc9230aeda072c86dbd13c7eac2caf0))
+
 ## [1.2.1](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.2.0...v1.2.1) (2026-09-08)
 
 
