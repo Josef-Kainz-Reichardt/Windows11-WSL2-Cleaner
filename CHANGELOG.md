@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.2.0...v1.2.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* migrate pre-rename installs, consistent windows11wsl2cleaner naming ([c0b543b](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/commit/c0b543b89ad3a7fe5fa0d8c48843a181e4d47758))
+
 # [1.2.0](https://github.com/Josef-Kainz-Reichardt/Windows11-WSL2-Cleaner/compare/v1.1.1...v1.2.0) (2026-09-08)
 
 
